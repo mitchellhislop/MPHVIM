@@ -23,15 +23,13 @@ Bundle 'gmarik/vundle'
 " ---------------
 
 " Navigation
-Bundle 'ZoomWin'
-Bundle 'wincent/Command-T'
 " This fork is required due to remapping ; to :
 Bundle 'christoomey/vim-space'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'mutewinter/LustyJuggler'
 Bundle 'kien/ctrlp.vim'
+Bundle 'fholgado/minibufexpl.vim'
 " UI Additions
-Bundle 'mutewinter/vim-indent-guides'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Rykka/ColorV'
@@ -50,10 +48,8 @@ Bundle 'milkypostman/vim-togglelist'
 Bundle 'IndexedSearch'
 Bundle 'xolox/vim-session'
 Bundle 'Raimondi/delimitMate'
-Bundle 'scrooloose/syntastic'
 Bundle 'ervandew/supertab'
 Bundle 'gregsexton/MatchTag'
-Bundle 'Shougo/neocomplcache'
 " Language Additions
 "   Ruby
 Bundle 'vim-ruby/vim-ruby'
@@ -75,7 +71,6 @@ Bundle 'matchit.zip'
 Bundle 'kana/vim-textobj-user'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 " Libraries
-Bundle 'L9'
 Bundle 'tpope/vim-repeat'
 Bundle 'tomtom/tlib_vim'
 
@@ -85,10 +80,13 @@ filetype plugin indent on  " Automatically detect file types. (must turn on afte
 " Note: This line MUST come before any <leader> mappings
 let mapleader=","
 
+set nobackup
+set noswapfile
+nnoremap <leader>nnn :set hlsearch!<CR>
 " ----------------------------------------
 " Platform Specific Configuration
 " ----------------------------------------
-
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 if has('win32') || has('win64')
   " Windows
   source $VIMRUNTIME/mswin.vim
@@ -163,7 +161,7 @@ set formatoptions=crql
 " ---------------
 " Text Format
 " ---------------
-set tabstop=2
+set tabstop=4
 set backspace=2 " Delete everything with backspace
 set shiftwidth=2  " Tabs under smart indent
 set cindent
@@ -247,15 +245,13 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 nmap <silent> <leader>s :set spell!<CR>
 " Edit vimrc with ,v
 nmap <silent> <leader>v :e ~/.vim/vimrc<CR>
-
+nmap <C-p> :CtrlP<CR>
 " Window Movement
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-k> :wincmd k<CR>
 nmap <silent> <C-l> :wincmd l<CR>
 " Previous Window
-nmap <silent> <C-p> :wincmd p<CR>
-
 " Equal Size Windows
 nmap <silent> <leader>w= :wincmd =<CR>
 
@@ -266,7 +262,6 @@ nmap <silent> <leader>sv :vsplit<CR>
 nmap <silent> <leader>hs :split<CR>
 nmap <silent> <leader>vs :vsplit<CR>
 nmap <silent> <leader>sc :close<CR>
-
 " ----------------------------------------
 " Auto Commands
 " ----------------------------------------
@@ -473,6 +468,8 @@ if has('win32') || has('win64')
 elseif has('gui_macvim')
   let g:Powerline_symbols = 'fancy'
 endif
+let g:Powerline_symbols = 'fancy'
+set t_Co=256
 
 " ---------------
 " Vundle
@@ -484,7 +481,7 @@ nmap <Leader>bc :BundleClean<CR>
 " ----------------------------------------
 " Functions
 " ----------------------------------------
-
+au BufNewFile,BufRead *.thtml setfiletype php
 " ---------------
 " OpenURL
 " ---------------
